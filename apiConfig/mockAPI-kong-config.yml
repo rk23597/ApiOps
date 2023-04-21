@@ -1,0 +1,69 @@
+_format_version: "3.0"
+plugins:
+- config:
+    anonymous: null
+    hide_credentials: false
+  enabled: true
+  name: basic-auth
+  protocols:
+  - grpc
+  - grpcs
+  - http
+  - https
+  - ws
+  - wss
+  route: My_Mock_Target_API-getJSON
+  service: My_Mock_Target_API
+  tags:
+  - demo_1
+services:
+- connect_timeout: 60000
+  enabled: true
+  host: mocktarget.apigee.net
+  name: My_Mock_Target_API
+  path: /
+  port: 80
+  protocol: http
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    methods:
+    - GET
+    name: My_Mock_Target_API-getJSON
+    path_handling: v0
+    paths:
+    - ~/json$
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: false
+    tags:
+    - OAS3_import
+    - OAS3file_mockAPI.yml
+  - https_redirect_status_code: 426
+    methods:
+    - GET
+    name: My_Mock_Target_API-getXML
+    path_handling: v0
+    paths:
+    - ~/xml$
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: false
+    tags:
+    - OAS3_import
+    - OAS3file_mockAPI.yml
+  tags:
+  - OAS3_import
+  - OAS3file_mockAPI.yml
+  write_timeout: 60000
