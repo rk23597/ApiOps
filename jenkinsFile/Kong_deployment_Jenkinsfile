@@ -32,7 +32,7 @@ pipeline{
                
 			   sh '''for file_path in "$folder_path"/*
                        do
-					      echo "Iteration $file_path"
+					      sudo echo "Iteration $file_path"
                        //  inso lint spec ./$file_path
                        done'''
             }
