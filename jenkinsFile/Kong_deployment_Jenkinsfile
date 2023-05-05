@@ -1,0 +1,75 @@
+pipeline{   
+    parameters {
+            string defaultValue: 'main', description: 'Enter Your Branch', name: 'BRANCH'
+            choice choices: ['default', 'sandbox','production'], description: "Choose Workspace From Dropdown- ", name: 'WORKSPACE'
+        }
+   agent any
+   stages {
+        //Checkout Git Repo
+        stage('Checkout') {
+            steps {
+                pwd()
+                git  url: 'https://github.com/rk23597/ApiOps.git', branch: params.BRANCH
+            }
+        }
+        //Set Some Env Vars
+        stage('Set Some Env Vars') {
+            steps {
+                sh '''folder_path="apiConfig"
+                      file_count=$(ls -1 "$folder_path" | wc -l)
+                      echo $file_count'''
+            }
+        }
+        //Lint the OpenAPI spec using Insomnia CLI
+        stage('Lint OpenAPI Spec') {
+            steps {
+                sh '''for file_path in "$folder_path"/*
+                       do
+                         inso lint spec ./$file_path
+                       done'''
+            }
+        }
+        //Generate Kong configuration in declarative format
+        stage('Generate Kong configuration in declarative format') {
+            steps {
+                sh '''for file_path in "$folder_path"/*
+                        do
+                            inso generate config ./$file_path --type declarative -o ./$file_path
+                        done'''
+            }
+        }
+        //Display the contents of the generated Kong configuration
+        stage('open kong.yaml') {
+            steps {
+                sh 'cat ./apiConfig/$OPEN_SPEC_FILE'
+            }
+        }
+
+        //Validate the Kong configuration using deck CLI
+        stage('Validate the Kong configuration using deck CLI') {
+            steps {
+                echo "$OPEN_SPEC_FILE"
+                sh 'deck validate -s ./apiConfig/$OPEN_SPEC_FILE'
+            }
+        }
+        //Convert the Kong configuration to version 3.x using deck CLI
+        stage('Convert kong declarative') {
+            steps {
+                
+                sh 'yes | deck convert --from kong-gateway-2.x --to kong-gateway-3.x --input-file ./apiConfig/$OPEN_SPEC_FILE --output-file ./apiConfig/$OPEN_SPEC_FILE'
+            }
+        } 
+        //Deploy to Kong
+        stage('Deploy to Kong') {
+            steps {
+                sh 'deck sync -s ./apiConfig/$OPEN_SPEC_FILE --kong-addr http://34.125.50.121:8001 --workspace $WORKSPACE --tls-skip-verify'
+            }
+        }
+   }
+   post {
+        always {
+           echo "hello Rakesh"
+           //deleteDir()
+       }
+    }
+}
