@@ -19,11 +19,16 @@ pipeline{
 			  }
             }
         }
+		//Print No of files
+        stage('Print No of files') {
+            steps {
+			    sh '''env.file_count=$(ls -1 "$folder_path" | wc -l)
+                      echo $file_count'''
+            }
+        }
         //Lint the OpenAPI spec using Insomnia CLI
         stage('Lint OpenAPI Spec') {
             steps {
-			   // sh '''env.file_count=$(ls -1 "$folder_path" | wc -l)
-               //       echo $file_count'''
                
 			   sh '''for file_path in "$folder_path"/*
                        do
@@ -71,8 +76,8 @@ pipeline{
    }
    post {
         always {
-           echo "hello Rakesh"
-           //deleteDir()
+           //echo "hello Rakesh"
+           deleteDir()
        }
     }
 }
