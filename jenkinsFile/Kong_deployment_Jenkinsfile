@@ -1,15 +1,14 @@
 pipeline{   
     parameters {
-            string defaultValue: 'main', description: 'Enter Your Branch', name: 'BRANCH'
+            string defaultValue: 'master', description: 'Enter Your Branch', name: 'BRANCH'
             choice choices: ['default', 'sandbox','production'], description: "Choose Workspace From Dropdown- ", name: 'WORKSPACE'
         }
    agent any
    stages {
         //Checkout Git Repo
-        stage('Checkout') {
+        stage('echo current pwd') {
             steps {
                 pwd()
-                git  url: 'https://github.com/rk23597/ApiOps.git', branch: params.BRANCH
             }
         }
         //Set Some Env Vars
