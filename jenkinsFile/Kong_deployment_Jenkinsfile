@@ -5,12 +5,6 @@ pipeline{
         }
    agent any
    stages {
-        //Checkout Git Repo
-        stage('echo current pwd') {
-            steps {
-                pwd()
-            }
-        }
         //Set Some Env Vars
         stage('Set Some Env Vars') {
             steps {
@@ -45,38 +39,38 @@ pipeline{
                         done'''
             }
         }
-        //Display the contents of the generated Kong configuration
-        stage('open kong.yaml') {
-            steps {
-                sh 'cat ./apiConfig/$OPEN_SPEC_FILE'
-            }
-        }
 
         //Validate the Kong configuration using deck CLI
         stage('Validate the Kong configuration using deck CLI') {
             steps {
-                echo "$OPEN_SPEC_FILE"
-                sh 'deck validate -s ./apiConfig/$OPEN_SPEC_FILE'
+                sh '''for file_path in "$folder_path"/*
+					do
+						deck validate -s ./$file_path
+					done'''
             }
         }
         //Convert the Kong configuration to version 3.x using deck CLI
         stage('Convert kong declarative') {
             steps {
-                
-                sh 'yes | deck convert --from kong-gateway-2.x --to kong-gateway-3.x --input-file ./apiConfig/$OPEN_SPEC_FILE --output-file ./apiConfig/$OPEN_SPEC_FILE'
+                sh '''for file_path in "$folder_path"/*
+						do
+						yes | deck convert --from kong-gateway-2.x --to kong-gateway-3.x --input-file ./$file_path --output-file ./$file_path
+						done'''
             }
         } 
         //Deploy to Kong
         stage('Deploy to Kong') {
             steps {
-                sh 'deck sync -s ./apiConfig/$OPEN_SPEC_FILE --kong-addr http://34.125.50.121:8001 --workspace $WORKSPACE --tls-skip-verify'
+                sh '''for file_path in "$folder_path"/*
+					do
+				    	deck sync -s ./$file_path --kong-addr http://34.125.21.189:8001 --workspace $WORKSPACE --tls-skip-verify
+					done'''
             }
         }
    }
    post {
         always {
-           echo "hello Rakesh"
-           //deleteDir()
+           deleteDir()
        }
     }
 }
