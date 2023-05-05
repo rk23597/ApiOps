@@ -31,10 +31,9 @@ pipeline{
             steps {
                
 			   sh '''for file_path in "$folder_path"/*
-                       do
-					      sudo echo "Iteration $file_path"
-                       //  inso lint spec ./$file_path
-                       done'''
+						do
+							 echo "Iteration $file_path"
+						done'''
             }
         }
         //Generate Kong configuration in declarative format
