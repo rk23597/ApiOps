@@ -14,14 +14,16 @@ pipeline{
         //Set Some Env Vars
         stage('Set Some Env Vars') {
             steps {
-			    env.folder_path="apiConfig"
-                sh '''env.file_count=$(ls -1 "$folder_path" | wc -l)
-                      echo $file_count'''
+			  script {
+			     env.folder_path = "apiConfig"
+			  }
             }
         }
         //Lint the OpenAPI spec using Insomnia CLI
         stage('Lint OpenAPI Spec') {
             steps {
+			    sh '''env.file_count=$(ls -1 "$folder_path" | wc -l)
+                      echo $file_count'''
                 sh '''for file_path in "$folder_path"/*
                        do
 					      echo "Iteration $file_path"
