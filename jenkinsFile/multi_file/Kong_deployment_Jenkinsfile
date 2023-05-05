@@ -79,7 +79,7 @@ pipeline{
                    sh '''for file_path in "$folder_path"/*
                             do
                                 deck dump -o kong-backup.yaml  --kong-addr $kong_admin_api_host   --tls-skip-verify 
-                                deck sync -s kong-backup.yaml -s ./$file_path --kong-addr $kong_admin_api_host  --tls-skip-verify
+                                deck sync -s kong-backup.yaml -s ./$file_path --kong-addr $kong_admin_api_host  --tls-skip-verify --verbose 
                                 rm -rf kong-backup.yaml
                             done'''               
                 }
