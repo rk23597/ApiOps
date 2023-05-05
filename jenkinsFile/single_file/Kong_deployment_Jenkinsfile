@@ -1,6 +1,6 @@
 pipeline{   
     parameters {
-            string defaultValue: '', description: 'Enter Your Branch', name: 'BRANCH'
+            string defaultValue: 'master', description: 'Enter Your Branch', name: 'BRANCH'
             choice choices: ['default', 'sandbox','production'], description: "Choose Workspace From Dropdown- ", name: 'WORKSPACE'
             string defaultValue: '', description: 'Enter Open Spec Config File Name', name: 'OPEN_SPEC_FILE'
         }
