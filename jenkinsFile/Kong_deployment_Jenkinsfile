@@ -29,8 +29,8 @@ pipeline{
                
 			   sh '''for file_path in "$folder_path"/*
 						do
-						    state = "$state ./$file_path"
-							echo "$state"
+						    state="$state ./$file_path"
+							
 						done'''
             }
         }
