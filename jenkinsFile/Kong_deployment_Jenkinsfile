@@ -22,8 +22,8 @@ pipeline{
 		//Print No of files
         stage('Print No of files') {
             steps {
-			    sh '''env.file_count=$(ls -1 "$folder_path" | wc -l)
-                      echo $file_count'''
+			    sh '''file_count=$(ls -1 "$folder_path" | wc -l)
+                     echo $file_count'''
             }
         }
         //Lint the OpenAPI spec using Insomnia CLI
