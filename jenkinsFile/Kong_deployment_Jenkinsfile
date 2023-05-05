@@ -63,7 +63,7 @@ pipeline{
             steps {
                 sh '''for file_path in "$folder_path"/*
 					do
-				    	deck sync ./$file_path --kong-addr http://34.125.21.189:8001 --workspace $WORKSPACE --tls-skip-verify
+				    	deck sync -s ./apiConfig/httpbinIPOAS.yaml -s ./apiConfig/httpbinGETOAS.yaml --kong-addr http://34.125.21.189:8001 --workspace $WORKSPACE --tls-skip-verify
 					done'''
             }
         }
