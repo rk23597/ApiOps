@@ -76,8 +76,8 @@ pipeline{
         stage('backup the current kong declartive config file') {
             steps {
                 withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host')]) {
-                    sh '''ls 
-                          deck dump -o kong-backup.yaml  --kong-addr $kong_admin_api_host  --workspace $WORKSPACE --tls-skip-verify'''          
+                    sh '''deck dump -o kong-backup.yaml  --kong-addr $kong_admin_api_host  --workspace $WORKSPACE --tls-skip-verify
+                          ls '''          
                 }
             }
         }
