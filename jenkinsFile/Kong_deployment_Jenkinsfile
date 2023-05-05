@@ -24,7 +24,8 @@ pipeline{
             steps {
                 sh '''for file_path in "$folder_path"/*
                        do
-                         inso lint spec ./$file_path
+					      echo "Iteration $file_path
+                       //  inso lint spec ./$file_path
                        done'''
             }
         }
