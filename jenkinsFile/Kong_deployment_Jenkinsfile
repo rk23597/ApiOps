@@ -14,8 +14,8 @@ pipeline{
         //Set Some Env Vars
         stage('Set Some Env Vars') {
             steps {
-                sh '''folder_path="apiConfig"
-                      file_count=$(ls -1 "$folder_path" | wc -l)
+                sh '''env.folder_path="apiConfig"
+                      env.file_count=$(ls -1 "$folder_path" | wc -l)
                       echo $file_count'''
             }
         }
