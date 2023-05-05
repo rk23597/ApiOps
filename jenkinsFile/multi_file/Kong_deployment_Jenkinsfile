@@ -87,7 +87,7 @@ pipeline{
                 withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host')]) {
                    sh '''for file_path in "$folder_path"/*
                             do
-                                deck sync -s ./kong-backup.yaml -s ./$file_path --kong-addr $kong_admin_api_host --workspace $WORKSPACE --tls-skip-verify
+                                deck sync -s kong-backup.yaml -s ./$file_path --kong-addr $kong_admin_api_host --workspace $WORKSPACE --tls-skip-verify
                             done'''               
                 }
             }
