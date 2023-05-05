@@ -3,8 +3,11 @@ pipeline{
             string defaultValue: 'master', description: 'Enter Your Branch', name: 'BRANCH'
             choice choices: ['default', 'sandbox','production'], description: "Choose Workspace From Dropdown- ", name: 'WORKSPACE'
         }
-   agent any
-   stages {
+	environment {
+        state = ""
+    }	
+    agent any
+    stages {
         //Set Some Env Vars
         stage('Set Some Env Vars') {
             steps {
@@ -18,6 +21,17 @@ pipeline{
             steps {
 			    sh '''file_count=$(ls -1 "$folder_path" | wc -l)
                      echo $file_count'''
+            }
+        }
+		//Testing
+        stage('Testing') {
+            steps {
+               
+			   sh '''for file_path in "$folder_path"/*
+						do
+						    state = "${state} ./$file_path"
+							inso lint spec ./$file_path
+						done'''
             }
         }
         //Lint the OpenAPI spec using Insomnia CLI
