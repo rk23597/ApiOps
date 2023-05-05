@@ -1,0 +1,23 @@
+pipeline {
+    parameters {
+        string description: 'Enter Your Branch', name: 'BRANCH'
+        choice description: "Choose Workspace From Dropdown- ", name: 'WORKSPACE'
+        string description: 'Enter Open Spec Config File Name', name: 'OPEN_SPEC_FILE'
+         }
+    agent any
+    stages {
+        //Lint the OpenAPI spec using Insomnia CLI
+        stage('Deploy to dev portal') {
+            steps {
+                withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host')]) {
+                    sh ' KONG_ADMIN_URL=$kong_admin_api_host portal deploy --preserve --workspace $WORKSPACE -D '
+                }
+            }
+        }
+    }
+    post {
+        always {
+            deleteDir()
+        }
+    }
+}

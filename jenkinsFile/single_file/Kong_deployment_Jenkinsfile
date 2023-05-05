@@ -47,6 +47,17 @@ pipeline{
                 }
             }
         }
+        //schedule the another job
+        stage('Scheduling Job - publishOASToKongPortal') {
+            steps {
+                script{
+                    build job: 'publishOASToKongPortal', 
+                    parameters:[[$class: 'StringParameterValue', name: 'BRANCH', value: "${BRANCH}"],
+                                [$class: 'StringParameterValue', name: 'WORKSPACE', value: "${WORKSPACE}"],
+                                [$class: 'StringParameterValue', name: 'OPEN_SPEC_FILE', value: "${OPEN_SPEC_FILE}"]]      
+                }  
+            }
+        }
    }
    post {
         always {
