@@ -1,8 +1,8 @@
 pipeline {
     parameters {
-        string description: 'Enter Your Branch', name: 'BRANCH'
-        choice description: "Choose Workspace From Dropdown- ", name: 'WORKSPACE'
-        string description: 'Enter Open Spec Config File Name', name: 'OPEN_SPEC_FILE'
+        string description: 'Branch Name', name: 'BRANCH'
+        string description: "Workspace Name- ", name: 'WORKSPACE'
+        string description: 'Kong Spec Config File Name', name: 'OPEN_SPEC_FILE'
          }
     agent any
     stages {
