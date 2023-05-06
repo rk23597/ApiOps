@@ -82,7 +82,7 @@ pipeline{
 
 for file_path in "$folder_path"/*
    do
-        state+="-s $file_path "
+        state="-s $file_path "
    done
 
 echo "$state"
