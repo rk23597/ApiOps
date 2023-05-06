@@ -78,13 +78,15 @@ pipeline{
          stage('Deploy to Kong') {
             steps {
                 withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host')]) {
-                    sh '''state=""
-                        for file_path in "$folder_path"/*
-                            do
-                                state+="-s ./$file_path "
-                            done
-                        echo "$state"
-                    '''              
+                    sh sh '''state=""
+
+for file_path in "$folder_path"/*
+   do
+        state+="-s $file_path "
+   done
+
+echo "$state"
+'''            
                 }
             }
         }
