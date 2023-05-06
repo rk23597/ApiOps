@@ -84,7 +84,6 @@ pipeline{
                                 state+="-s $file_path "
                             done
                         echo "$state"
-                       // deck sync $state --kong-addr $kong_admin_api_host  --tls-skip-verify 
                     '''              
                 }
             }
