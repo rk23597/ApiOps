@@ -75,6 +75,7 @@ pipeline{
         //     }
         // }
 
+
          stage('Deploy to Kong') {
             steps {
                 withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host')]) {
@@ -84,11 +85,19 @@ pipeline{
                                 do
                                         state="$state -s $file_path "
                                 done
-
-                            echo "$state"
                             deck sync $state --kong-addr $kong_admin_api_host --workspace $WORKSPACE --tls-skip-verify
                             '''            
                 }
+            }
+        }
+        //schedule the another job
+        stage('Scheduling Job - publishOASToKongPortal2.0') {
+            steps {
+                script{
+                    build job: 'publishOASToKongPortal2.0', 
+                    parameters:[[$class: 'StringParameterValue', name: 'BRANCH', value: "${BRANCH}"],
+                                [$class: 'StringParameterValue', name: 'WORKSPACE', value: "${WORKSPACE}"]]      
+                }  
             }
         }
      }
