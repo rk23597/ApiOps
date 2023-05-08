@@ -9,7 +9,7 @@ pipeline {
         stage('Deploy to dev portal') {
             steps {
                 withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host'), string(credentialsId: 'kong_admin_token', variable: 'kong_admin_token')]) {
-                    sh '''KONG_ADMIN_URL=http://34.16.139.178:8001  KONG_ADMIN_TOKEN=password  portal deploy  --preserve default -D'''
+                    sh '''KONG_ADMIN_URL=http://34.16.112.178:8033  KONG_ADMIN_TOKEN=password  portal deploy  --preserve default -D'''
                 }
             }
         }
