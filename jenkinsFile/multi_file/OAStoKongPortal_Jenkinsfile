@@ -10,7 +10,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host'), string(credentialsId: 'kong_admin_token', variable: 'kong_admin_token')]) {
                     sh '''export KONG_ADMIN_URL=$kong_admin_api_host \
-                          export KONG_ADMIN_TOKEN=$kong_admin_token \
+                          export KONG_ADMIN_TOKEN=password \
                           portal deploy  --preserve $WORKSPACE -D'''
                 }
             }
