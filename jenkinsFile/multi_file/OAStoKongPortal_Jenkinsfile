@@ -18,7 +18,8 @@ pipeline {
     }
     post {
         always {
-            deleteDir()
+          echo "rakesh"
+          //    deleteDir()
         }
     }
 }
