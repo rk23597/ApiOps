@@ -16,13 +16,6 @@ pipeline{
 			  }
             }
         }
-		//Print No of files
-        stage('Print No of files') {
-            steps {
-			    sh '''file_count=$(ls -1 "$folder_path" | wc -l)
-                     echo $file_count'''
-            }
-        }
         //Lint the OpenAPI spec using Insomnia CLI
         stage('Lint OpenAPI Spec') {
             steps {
@@ -61,20 +54,6 @@ pipeline{
 						done'''
             }
         } 
-        //Deploy to Kong
-        // stage('Deploy to Kong') {
-        //     steps {
-        //         withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host')]) {
-        //            sh '''for file_path in "$folder_path"/*
-        //                     do
-        //                         deck dump -o kong-backup.yaml  --kong-addr $kong_admin_api_host   --tls-skip-verify 
-        //                         deck sync -s kong-backup.yaml -s ./$file_path --kong-addr $kong_admin_api_host  --tls-skip-verify --verbose 2
-        //                         rm -rf kong-backup.yaml
-        //                     done'''               
-        //         }
-        //     }
-        // }
-
 
          stage('Deploy to Kong') {
             steps {
@@ -103,7 +82,6 @@ pipeline{
      }
    post {
         always {
-	   //echo "Hello Rakesh"
            deleteDir()
        }
     }
