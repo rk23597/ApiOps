@@ -9,16 +9,13 @@ pipeline {
         stage('Deploy to dev portal') {
             steps {
                 withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host'), string(credentialsId: 'kong_admin_token', variable: 'kong_admin_token')]) {
-                    sh '''unset KONG_ADMIN_TOKEN \\
-                          unset KONG_ADMIN_URL \\
-                          KONG_ADMIN_URL=http://34.16.112.178:8033  KONG_ADMIN_TOKEN=password  portal deploy  --preserve default -D --verbose 2'''
+                    sh 'KONG_ADMIN_URL=$kong_admin_api_host KONG_ADMIN_TOKEN=$kong_admin_token portal deploy --preserve $WORKSPACE -D '
                 }
             }
         }
     }
     post {
         always {
-          //echo "rakesh"
               deleteDir()
         }
     }
