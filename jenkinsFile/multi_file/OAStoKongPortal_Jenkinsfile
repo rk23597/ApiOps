@@ -9,11 +9,10 @@ pipeline {
         stage('Deploy to dev portal') {
             steps {
                 withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host'), string(credentialsId: 'kong_admin_token', variable: 'kong_admin_token')]) {
-                    sh '''cat ./workspaces/default/cli.conf.yaml
+sh '''cat ./workspaces/default/cli.conf.yaml
 sed -i \'s/kong_admin_url: http:\\/\\/localhost:8001/kong_admin_url: http:\\/\\/$kong_admin_api_host:8001/g\' ./workspaces/default/cli.conf.yaml
 sed -i "s/kong_admin_token: \'\'/kong_admin_token: $kong_admin_token/g" ./workspaces/default/cli.conf.yaml
-cat ./workspaces/default/cli.conf.yaml
-portal deploy --preserve $WORKSPACE -D'''
+cat ./workspaces/default/cli.conf.yaml'''
                 }
             }
         }
