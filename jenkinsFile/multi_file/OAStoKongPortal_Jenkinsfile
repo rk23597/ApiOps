@@ -8,8 +8,8 @@ pipeline {
         //Lint the OpenAPI spec using Insomnia CLI
         stage('Deploy to dev portal') {
             steps {
-                withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host')]) {
-                    sh ' KONG_ADMIN_URL=$kong_admin_api_host portal deploy --preserve $WORKSPACE -D '
+                withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host'), string(credentialsId: 'kong_admin_token', variable: 'kong_admin_token')]) {
+                    sh ' KONG_ADMIN_URL=$kong_admin_api_host KONG_ADMIN_TOKEN=$kong_admin_token portal deploy  --preserve $WORKSPACE -D '
                 }
             }
         }
