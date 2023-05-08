@@ -78,14 +78,14 @@ pipeline{
 
          stage('Deploy to Kong') {
             steps {
-                withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host')]) {
+                withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host')],[string(credentialsId: 'kong_admin_token', variable: 'kong_admin_token')]) {
                     sh '''state=""
 
                             for file_path in "$folder_path"/*
                                 do
                                         state="$state -s $file_path "
                                 done
-                            deck sync $state --kong-addr $kong_admin_api_host --workspace $WORKSPACE --tls-skip-verify
+                            deck sync $state --kong-addr $kong_admin_api_host --headers kong-admin-token:$kong_admin_token --workspace $WORKSPACE --tls-skip-verify
                             '''            
                 }
             }
