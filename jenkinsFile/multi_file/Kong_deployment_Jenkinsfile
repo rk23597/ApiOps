@@ -103,8 +103,8 @@ pipeline{
      }
    post {
         always {
-	       //echo "Hello Rakesh"
-           deleteDir()
+	       echo "Hello Rakesh"
+           //deleteDir()
        }
     }
 }
