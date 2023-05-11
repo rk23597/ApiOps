@@ -1,0 +1,10 @@
+_id: ut_cd0a93a2503c4db9b3d3f8f78c735d74
+type: UnitTest
+parentId: uts_cfec2d297d1d4328916261eb3955b19e
+modified: 1683797604773
+created: 1683796919108
+requestId: req_536454539d874d958dfd8e39e67df373
+name: Wrong Path (404)
+code: |-
+  const response1 = await insomnia.send();
+  expect(response1.status).to.equal(404);
