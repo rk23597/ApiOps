@@ -3,9 +3,9 @@ info:
   title: HttpBin GET API
   version: 1.0.0
 servers:
-  - url: https://httpbin.org
+  - url:	https://rakeshkumawat-eval-test.apigee.net
 paths:
-  /get:
+  /httpbin/get:
     get:
       operationId: getMessage
       summary: Get Message
