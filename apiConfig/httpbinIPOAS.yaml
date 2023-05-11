@@ -1,14 +1,22 @@
 openapi: 3.0.0
 info:
-  title: HttpBin IP APIs
+  title: HttpBin GET API
   version: 1.0.0
+  description: This is Mock API to get Static IP
+  contact:
+    email: rakesh.kumawat@neosalpha.com
 servers:
-  - url: https://httpbin.org
+  - url: https://rakeshkumawat-eval-test.apigee.net
+tags:
+  - name: ip
+    description: get VM IP
 paths:
-  /ip:
+  /httpbin/ip:
     get:
+      tags:
+        - ip
       operationId: getIpAddress
-      summary: Get IP Address
+      description: Get IP Address
       responses:
         '200':
           description: OK
