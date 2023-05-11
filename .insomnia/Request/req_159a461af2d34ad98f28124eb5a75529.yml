@@ -1,0 +1,21 @@
+_id: req_159a461af2d34ad98f28124eb5a75529
+type: Request
+parentId: wrk_2dbb665594d84ab9a522151671d73d55
+modified: 1683799677253
+created: 1683799529579
+url: "{{ _.base_url }}/httpbin/ip"
+name: Get IP Address
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1683799529579
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

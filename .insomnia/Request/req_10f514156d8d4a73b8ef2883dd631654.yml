@@ -1,0 +1,21 @@
+_id: req_10f514156d8d4a73b8ef2883dd631654
+type: Request
+parentId: wrk_2dbb665594d84ab9a522151671d73d55
+modified: 1683799701861
+created: 1683799699869
+url: "{{ _.base_url }}/httpbin/ips"
+name: Get IP Address Invalid Path
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1683797736116.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
