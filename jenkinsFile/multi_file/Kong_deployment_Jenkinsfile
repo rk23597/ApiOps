@@ -64,7 +64,9 @@ pipeline{
 
         stage('Deck dump') {
             steps {
-                sh 'deck dump -o $WORKSPACE-kong-config.yaml --kong-addr $kong_admin_api_host --headers kong-admin-token:$kong_admin_token --workspace $WORKSPACE --tls-skip-verify'
+                withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host'), string(credentialsId: 'kong_admin_token', variable: 'kong_admin_token')]) {
+                    sh 'deck dump --kong-addr $kong_admin_api_host --headers kong-admin-token:$kong_admin_token --workspace $WORKSPACE -o $WORKSPACE-kong-config.yaml --tls-skip-verify'
+                }
             }  
         }
 
