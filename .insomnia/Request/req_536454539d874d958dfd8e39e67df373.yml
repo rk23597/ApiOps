@@ -1,9 +1,9 @@
 _id: req_536454539d874d958dfd8e39e67df373
 type: Request
 parentId: wrk_2dbb665594d84ab9a522151671d73d55
-modified: 1683797438091
+modified: 1683798946047
 created: 1683797426770
-url: "{{ _.base_url }}/get/notfound"
+url: "{{ _.base_url }}/httpbin/get/notfound"
 name: Get Message Invalid Path
 description: ""
 method: GET
