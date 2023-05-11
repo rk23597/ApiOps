@@ -26,6 +26,13 @@ pipeline{
 						done'''
             }
         }
+
+        stage('Perfom Unit Testing') {
+            steps {
+                sh 'inso run test "ApiOps.git" --env "openspec_env"'
+            }  
+        }
+
         //Generate Kong configuration in declarative format
         stage('Generate Kong configuration in declarative format') {
             steps {
@@ -55,6 +62,12 @@ pipeline{
             }
         } 
 
+        stage('Deck dump') {
+            steps {
+                sh 'deck dump -o $WORKSPACE-kong-config.yaml --kong-addr $kong_admin_api_host --headers kong-admin-token:$kong_admin_token --workspace $WORKSPACE --tls-skip-verify'
+            }  
+        }
+
          stage('Deploy to Kong') {
             steps {
                 withCredentials([string(credentialsId: 'kong_admin_api_host', variable: 'kong_admin_api_host'), string(credentialsId: 'kong_admin_token', variable: 'kong_admin_token')]) {
@@ -62,18 +75,14 @@ pipeline{
 
                             for file_path in "$folder_path"/*
                                 do
-                                        state="$state -s $file_path "
+                                    state="$state -s $file_path "
                                 done
                             deck sync $state --kong-addr $kong_admin_api_host --headers kong-admin-token:$kong_admin_token --workspace $WORKSPACE --tls-skip-verify
                             '''            
                 }
             }
         }
-        stage('Perfom Integration Testing') {
-            steps {
-                sh 'inso run test "ApiOps.git" --env "openspec_env"'
-            }  
-        }
+
         //schedule the another job
         stage('Scheduling Job - publishOASToKongPortal2.0') {
             steps {
