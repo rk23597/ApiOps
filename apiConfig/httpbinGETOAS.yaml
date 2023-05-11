@@ -3,9 +3,9 @@ info:
   title: HttpBin GET API
   version: 1.0.0
 servers:
-  - url: https://httpbin.org/get
+  - url: https://httpbin.org
 paths:
-  /ip:
+  /get:
     get:
       operationId: getMessage
       summary: Get Message
