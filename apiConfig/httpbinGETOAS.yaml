@@ -3,7 +3,7 @@ info:
   title: HttpBin GET API
   version: 1.0.0
 servers:
-  - url:	https://rakeshkumawat-eval-test.apigee.net
+  - url: https://rakeshkumawat-eval-test.apigee.net
 paths:
   /httpbin/get:
     get:
