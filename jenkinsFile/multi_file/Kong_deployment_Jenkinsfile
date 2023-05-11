@@ -68,6 +68,7 @@ pipeline{
                             '''            
                 }
             }
+        }
         stage('Perfom Integration Testing') {
             steps {
                 sh 'inso run test "ApiOps.git" --env "openspec_env"'
