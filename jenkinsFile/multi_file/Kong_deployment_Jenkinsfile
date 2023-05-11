@@ -71,7 +71,7 @@ pipeline{
         }
         stage('Perfom Integration Testing') {
             steps {
-                sh 'sudo inso run test "ApiOps.git" --env "openspec_env"'
+                sh 'inso run test "ApiOps.git" --env "openspec_env"'
             }  
         }
         //schedule the another job
