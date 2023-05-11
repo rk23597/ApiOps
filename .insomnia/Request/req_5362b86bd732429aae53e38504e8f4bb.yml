@@ -1,9 +1,9 @@
-_id: req_76dc0ad4c8714d0497aa354ac12287f7
+_id: req_5362b86bd732429aae53e38504e8f4bb
 type: Request
 parentId: wrk_2dbb665594d84ab9a522151671d73d55
-modified: 1683702436259
-created: 1683702417773
-url: https://httpbin.org/get
+modified: 1683796191597
+created: 1683795942654
+url: "{{ _.base_url }}/get"
 name: Get Message
 description: ""
 method: GET
@@ -11,7 +11,7 @@ body: {}
 parameters: []
 headers: []
 authentication: {}
-metaSortKey: -1683702417773
+metaSortKey: -1683795942654
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true
