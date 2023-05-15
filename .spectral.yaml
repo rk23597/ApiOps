@@ -1,11 +1,21 @@
 extends: spectral:oas
+formats: [oas3]
 rules:
-  tag-description:
-    description: Please provide a description for each tag.
-    documentationUrl: https://www.example.com/docs/tag-description.md
-    recommended: true
+  info-contact:
     severity: error
-    given: $.tags[*]
-    then:
-      field: description
-      function: truthy
+    message: Info object must have "contact" object.
+  info-description:
+    severity: error
+    message: Info "description" must be present and non-empty string.
+  operation-description:
+    severity: error
+    message: Operation "description" must be present and non-empty string.
+  operation-operationId:
+    severity: error
+    message: Operation must have "operationId".
+  operation-tags:
+    severity: error
+    message: Operation must have non-empty "tags" array.
+  operation-operationId-valid-in-url:
+    severity: error
+    message: operationId must not contain characters that are invalid when used in a URL.
