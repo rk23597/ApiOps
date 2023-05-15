@@ -15,7 +15,6 @@ paths:
       tags:
         - get
       operationId: getMessage
-      description: get Static Message Response
       summary: Get Message
       responses:
         '200':
