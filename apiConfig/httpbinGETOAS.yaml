@@ -9,7 +9,6 @@ servers:
   - url: https://rakeshkumawat-eval-test.apigee.net
 tags:
   - name: get
-    description: static Message from backend
 paths:
   /httpbin/get:
     get:
