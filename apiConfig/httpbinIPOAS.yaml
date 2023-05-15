@@ -9,14 +9,11 @@ servers:
   - url: https://rakeshkumawat-eval-test.apigee.net
 tags:
   - name: ip
-    description: get VM IP
 paths:
   /httpbin/ip:
     get:
       tags:
         - ip
-      operationId: getIpAddress
-      description: Get IP Address
       responses:
         '200':
           description: OK
