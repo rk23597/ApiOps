@@ -9,6 +9,7 @@ servers:
   - url: https://rakeshkumawat-eval-test.apigee.net
 tags:
   - name: get
+  - name: rakesh
 paths:
   /httpbin/get:
     get:
