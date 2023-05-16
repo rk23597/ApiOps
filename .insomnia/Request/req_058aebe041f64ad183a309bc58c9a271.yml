@@ -1,0 +1,21 @@
+_id: req_058aebe041f64ad183a309bc58c9a271
+type: Request
+parentId: fld_f16a07e02883468da2fbcf4783b4e6ee
+modified: 1684240358868
+created: 1684240358868
+url: "{{ _.base_url }}/httpbin/ip"
+name: /httpbin/ip
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1684240358868
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

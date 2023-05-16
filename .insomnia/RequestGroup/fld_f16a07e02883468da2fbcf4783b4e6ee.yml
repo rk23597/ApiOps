@@ -1,0 +1,10 @@
+_id: fld_f16a07e02883468da2fbcf4783b4e6ee
+type: RequestGroup
+parentId: wrk_08530e6607ba46f6acb93640d24a5138
+modified: 1684240358866
+created: 1684240358866
+name: ip
+description: get VM IP
+environment: {}
+environmentPropertyOrder: null
+metaSortKey: -1684240358866

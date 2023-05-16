@@ -1,0 +1,30 @@
+_id: spc_4ebe593f900c4cbd85e46f4928b2d4ae
+type: ApiSpec
+parentId: wrk_08530e6607ba46f6acb93640d24a5138
+modified: 1684240344107
+created: 1684240337037
+fileName: httpbinIPOAS.yaml
+contents: |-
+  openapi: 3.0.0
+  info:
+    title: HttpBin IP API
+    version: 1.0.0
+    description: This is Mock API to get Static IP
+    contact:
+      email: rakesh.kumawat@neosalpha.com
+  servers:
+    - url: https://rakeshkumawat-eval-test.apigee.net
+  tags:
+    - name: ip
+      description: get VM IP
+  paths:
+    /httpbin/ip:
+      get:
+        tags:
+          - ip
+        operationId: getIpAddress
+        description: Get IP Address
+        responses:
+          '200':
+            description: OK
+contentType: yaml
